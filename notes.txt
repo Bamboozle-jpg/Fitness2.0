@@ -1,0 +1,11 @@
+Ideas for fitness v2
+    Challenges
+        Just every once in a while
+        Competition challenges (who can do the most x in the upcoming week)
+        Coop challenges (can we combined hit x number of push ups in the upcoming week)
+        Maybe set a limit on how many each person can add to the total per day
+    Allow people to enter what they are doing so others can see
+        Just like a listing that can be shown where each person has a little blurb
+    Allow people to log a full or partial workout
+        Have a type of streak that’s only full workouts and one that has a mix (or just partials) (will this encourage people not to do fulls?)
+    Leaderboards of how many total workouts people have done
