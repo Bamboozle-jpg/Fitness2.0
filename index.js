@@ -17,6 +17,19 @@ const client = new DiscordJS.Client({
     ]
 });
 
+// pretty much gets the list of all the commands?
+// sets up commands, but doesn't call them
+client.commands = new Collection();
+const commandsPath = path.join(__dirname, 'commands');
+const commandsFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+
+for (const file of commandsFiles) {
+    const filePath = path.join(commandsPath, file);
+    const command = require(filePath);
+
+    client.commands.set(command.data.name, command);
+}
+
 //Tells console when bot is turned on
 client.on('ready', () => {
     console.log("The Bot is Ready");
@@ -82,5 +95,24 @@ client.on('messageCreate', (message) => {
                 console.log("Error parsing JSON string:", err);
             }
         });
+    }
+})
+
+client.on('interactionCreate', async interaction => {
+    // makes sure it's a command
+    if (!interaction.isChatInputCommand()) return;
+
+    // gets desired command
+    const command = client.commands.get(interaction.commandName);
+
+    // ensures desired command exists
+    if (!command) return;
+
+    // actually does the command
+    try {
+        await command.execute(interaction);
+    } catch (error) {
+        console.error(error);
+        await interaction.reply({content: "There was an issue running your command", ephemeral: true});
     }
 })
