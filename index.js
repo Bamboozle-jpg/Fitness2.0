@@ -22,9 +22,12 @@ client.on('ready', () => {
 client.login(process.env.TOKEN)
 
 client.on('messageCreate', (Message) => {
-    if (Message.content === 'ping') {
-        Message.reply({
-            content: ':sad:'
-        })
+    if (!Message.author.bot) {
+        if (Message.content !== 'ping') {
+            var name = Message.author.username
+            Message.reply({
+                content: 'Hi, '+name
+            })
+        }
     }
 })
