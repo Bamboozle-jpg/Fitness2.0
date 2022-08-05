@@ -1,4 +1,8 @@
 #token
 .env
 
+#Random shit
 node_modules
+
+#People
+people.json
