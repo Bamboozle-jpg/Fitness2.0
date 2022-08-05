@@ -1,9 +1,9 @@
 const DiscordJS = require('discord.js');
 const { IntentsBitField } = require('discord.js');
-const fs = require('fs')
+const fs = require('fs');
 const dotenv = require('dotenv');
 const { channel, Channel } = require('diagnostics_channel');
-dotenv.config()
+dotenv.config();
 
 const client = new DiscordJS.Client({
     // What the bot will have access to
@@ -15,19 +15,19 @@ const client = new DiscordJS.Client({
         IntentsBitField.Flags.MessageContent,
         IntentsBitField.Flags.DirectMessages,
     ]
-})
+});
 
 //Tells console when bot is turned on
 client.on('ready', () => {
     console.log("The Bot is Ready");
-})
+});
 
 //Log in to bot
-client.login(process.env.TOKEN)
+client.login(process.env.TOKEN);
 
 //When a message is sent
 client.on('messageCreate', (message) => {
-    var channel = message.channelId
+    var channel = message.channelId;
 
     //Make sure message isn't by a bot
     if (!message.author.bot) {
