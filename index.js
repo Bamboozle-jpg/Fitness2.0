@@ -48,21 +48,28 @@ client.on('messageCreate', (message) => {
                 //Parse people.json
                 const people = JSON.parse(jsonString);
 
-                //If the message sent is a key value, send the contents of that key
+                //If the message sender is a key value, send the contents of that key
                 if (people[name]) {
+
+                    //Increases that persons score
                     people[name]++;
                     console.log(people[name]);
+
+                    //Writes the increase in score to the file
                     fs.writeFile("./people.json", JSON.stringify(people, null, 4), err => {
                         if (err) console.log("Error writing file:", err);
                     });
                     client.channels.cache.get(channel).send(name+' has a score of '+people[name]); 
 
-                //If not, say so
+                //If not, add it to the file
                 } else {
                     client.channels.cache.get(channel).send(name+' is not in the database yet, adding it now');
 
+                    //start off their score at one, and create it and stringify
                     people[name] = 1;
                     const jsonString = JSON.stringify(people, null, 4);
+
+                    //Write it to the file
                     fs.writeFile('./people.json', jsonString, err => {
                         if (err) {
                             console.log('Error writing file', err)
@@ -75,9 +82,5 @@ client.on('messageCreate', (message) => {
                 console.log("Error parsing JSON string:", err);
             }
         });
-
-        //Writin to files? Slushed?
-
-
     }
 })
