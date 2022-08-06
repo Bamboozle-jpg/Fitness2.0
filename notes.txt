@@ -9,8 +9,6 @@ Ideas for fitness v2
             Set them ahead of time
     Allow people to enter what they are doing so others can see
         Just like a listing that can be shown where each person has a little blurb
-    Allow people to log a full or partial workout
-        Have a type of streak that’s only full workouts and one that has a mix (or just partials) (will this encourage people not to do fulls?)
     Leaderboards of how many total workouts people have done
     Power ups like freeze streak to give rest days
     
@@ -18,3 +16,11 @@ Ideas for fitness v2
 Programming shit
     Add a t/f var in people for streak freeze active or not
     Add # var in people for how many streak freezes someone has (and a way to view it? Maybe a profile command to show ur profile)
+    Add # var in people for total (not streak) workouts and half workouts
+    Add a t/f var for if description is public
+    Add String var for descriptions of work outs
+    Add command for listing persoanl profile (# workouts, Streak freezes available, description, etc etc)
+    Add command for Leaderboards (not streaks, but totals)
+
+    AAAAALLLL the challenges stuff
+    Each challenge can have it's own Json file (can we make it so that we can create a json file with code?)
