@@ -4,8 +4,8 @@ const fs = require('fs');
 module.exports = {
     // command info
     data: new SlashCommandBuilder()
-        .setName("log-workout")
-        .setDescription("logging workout"),
+        .setName("half-workout")
+        .setDescription("logging half workout"),
     
     // runs command
     async execute(interaction) {
@@ -28,13 +28,9 @@ module.exports = {
                 if (people[personName]) {
 
                     //Makes sure they haven't already gained a day streak for the day
-                    if (!people[personName][2]) {
+                    if (!people[personName][3]) {
                         //Increases that persons score
-                        people[personName][0]++;
-                        if (!people[personName][3]) {
-                            people[personName][1]++;
-                        }
-                        people[personName][2] = true;
+                        people[personName][1]++;
                         people[personName][3] = true;
                         console.log(people[personName]);
 
@@ -46,17 +42,17 @@ module.exports = {
                     
                     //Lets them know if they've already logged for the day
                     } else {
-                        replyMessage = 'You\'ve already done your workout for today, so you\'re streak is safe!';
+                        replyMessage = 'You\'ve already done at least half your workout for today, so you\'re streak is safe!';
                     }
                 
                 //If not, add it to the file
                 } else {
-                    replyMessage = printName+' is not in the database yet, adding it now. \nYour full streak is **1**.\nYour half streak is **1**';
+                    replyMessage = printName+' is not in the database yet, adding it now. \nYour full streak is **0**.\nYour half streak is **1**';
 
 
 
                     //start off their score at one, and create it and stringify
-                    personSetup = [1, 1, true, true];
+                    personSetup = [0, 1, false, true];
                     people[personName] = personSetup;
                     const jsonString = JSON.stringify(people, null, 4);
 
