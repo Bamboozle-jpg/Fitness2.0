@@ -41,60 +41,60 @@ client.on('ready', () => {
 //Log in to bot
 client.login(process.env.TOKEN);
 
-//When a message is sent
-// client.on('messageCreate', (message) => {
-//     var channel = message.channelId;
+client.on('messageCreate', (message) => {
+    var channel = message.channelId;
+    
+    //Make sure message isn't by a bot
+    if (!message.author.bot && message.content === '!reset') {
 
-//     //Make sure message isn't by a bot
-//     if (!message.author.bot) {
+        //Then read people.json
+        fs.readFile("./people.json", "utf8", (err, jsonString) => {
+            const channel = message.channelId
+            if (err) {
+                console.log("File read failed:", err);
+                return;
+            }
+            try {
 
-//         //Then read people.json
-//         fs.readFile("./people.json", "utf8", (err, jsonString) => {
-//             if (err) {
-//                 console.log("File read failed:", err);
-//                 return;
-//             }
-//             try {
+                //Parse people.json
+                const people = JSON.parse(jsonString)
 
-//                 //Parse people.json
-//                 const people = JSON.parse(jsonString);
+                //Resets everyone's score for the day
+                for (const person in people) {
+                    
+                    //GETS USERNAME FROM ID
+                    var personA = person.replace(/</g, '');
+                    var personB = personA.replace(/>/g, '');
+                    var id = personB.replace(/@/g, '');
+                    user = client.users.cache.get(id);
+                    var userName = user.username
 
-//                 //If the message sender is a key value, send the contents of that key
-//                 if (people[personName]) {
+                    //If they haven't done full workout today, kill full workout streak
+                    if (!people[person][2]) {
+                        client.channels.cache.get(channel).send(userName+' lost their full streak of **'+people[person][0]+'**.');
+                        people[person][0] = 0;
+                    }
 
-//                     //Increases that persons score
-//                     people[personName]++;
-//                     console.log(people[personName]);
+                    //If they haven't done half workout today, kill half workout streak
+                    if (!people[person][3]) {
+                        client.channels.cache.get(channel).send(userName+' lost their half streak of **'+people[person][1]+'**.');
+                        people[person][1] = 0;
+                    }
 
-//                     //Writes the increase in score to the file
-//                     fs.writeFile("./people.json", JSON.stringify(people, null, 4), err => {
-//                         if (err) console.log("Error writing file:", err);
-//                     });
-//                     client.channels.cache.get(channel).send(personName+' has a score of '+people[personName]); 
+                    people[person][2] = false;
+                    people[person][3] = false;
+                }
 
-//                 //If not, add it to the file
-//                 } else {
-//                     client.channels.cache.get(channel).send(personName+' is not in the database yet, adding it now');
-
-//                     //start off their score at one, and create it and stringify
-//                     people[personName] = 1;
-//                     const jsonString = JSON.stringify(people, null, 4);
-
-//                     //Write it to the file
-//                     fs.writeFile('./people.json', jsonString, err => {
-//                         if (err) {
-//                             console.log('Error writing file', err)
-//                         } else {
-//                             console.log('Successfully wrote file')
-//                         }
-//                     })
-//                 }
-//             } catch (err) {
-//                 console.log("Error parsing JSON string:", err);
-//             }
-//         });
-//     }
-// })
+                //Writes the day reset to file (rewrites file with new values)
+                fs.writeFile("./people.json", JSON.stringify(people, null, 4), err => {
+                    if (err) console.log("Error writing file:", err);
+                });
+            } catch (err) {
+                console.log("Error parsing JSON string:", err);
+            }
+        });
+    }
+})
 
 client.on('interactionCreate', async interaction => {
     // makes sure it's a command

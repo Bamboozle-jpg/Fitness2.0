@@ -20,33 +20,42 @@ module.exports = {
                 return;
             }
             try {
-                console.log("it works up to 1");
+
                 //Parse people.json
                 const people = JSON.parse(jsonString)
 
                 //If the message sender is a key value, send the contents of that key
                 if (people[personName]) {
-                    console.log("it works up to 2");
-                    //Increases that persons score
-                    people[personName]++;
-                    console.log(people[personName]);
 
-                    //Writes the increase in score to the file
-                    fs.writeFile("./people.json", JSON.stringify(people, null, 4), err => {
-                        if (err) console.log("Error writing file:", err);
-                    });
-                    console.log("It really should be working 2");
-                    replyMessage = printName+' has a score of '+people[personName]; 
-                    console.log(replyMessage);
+                    //Makes sure they haven't already gained a day streak for the day
+                    if (!people[personName][2]) {
+                        //Increases that persons score
+                        people[personName][0]++;
+                        people[personName][1]++;
+                        people[personName][2] = true;
+                        people[personName][3] = true;
+                        console.log(people[personName]);
 
+                        //Writes the increase in score to the file and updates them
+                        fs.writeFile("./people.json", JSON.stringify(people, null, 4), err => {
+                            if (err) console.log("Error writing file:", err);
+                        });
+                        replyMessage = printName+' has a full streak of **'+people[personName][0]+'**.\nAnd a half streak of **'+people[personName][1]+'**.'; 
+                    
+                    //Lets them know if they've already logged for the day
+                    } else {
+                        replyMessage = 'You\'ve already done your workout for today, so you\'re streak is safe!';
+                    }
+                
                 //If not, add it to the file
                 } else {
-                    console.log("it works up to 3");
-                    replyMessage = printName+' is not in the database yet, adding it now, your score is 1';
-                    console.log(replyMessage);
+                    replyMessage = printName+' is not in the database yet, adding it now. \nYour full streak is **1**.\nYour half streak is **1**';
+
+
 
                     //start off their score at one, and create it and stringify
-                    people[personName] = 1;
+                    personSetup = [1, 1, true, true];
+                    people[personName] = personSetup;
                     const jsonString = JSON.stringify(people, null, 4);
 
                     //Write it to the file
@@ -61,9 +70,7 @@ module.exports = {
             } catch (err) {
                 console.log("Error parsing JSON string:", err);
             }
-            console.log(replyMessage+' number 2');
         });
-        console.log(replyMessage+" number 3");
         await setTimeout(function(){interaction.reply(replyMessage)}, 10);
     }
 }
