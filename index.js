@@ -1,3 +1,13 @@
+/*
+Formate for people is 
+discord ID
+0 : Full streak #
+1 : half streak #
+2 : full streak active or not
+3 : half streak active or not
+4 : name
+*/
+
 const DiscordJS = require('discord.js');
 const { IntentsBitField, GatewayIntentBits } = require('discord.js');
 const fs = require('fs');
@@ -6,6 +16,7 @@ const { channel, Channel } = require('diagnostics_channel');
 const { Collection } = require('discord.js')
 const path = require('node:path')
 dotenv.config();
+var globEveryone
 
 const client = new DiscordJS.Client({
     // What the bot will have access to
@@ -43,7 +54,8 @@ client.login(process.env.TOKEN);
 
 client.on('messageCreate', (message) => {
     var channel = message.channelId;
-    
+    var guildString = process.env.guildId + '';
+
     //Make sure message isn't by a bot
     if (!message.author.bot && message.content === '!reset') {
 
@@ -61,22 +73,17 @@ client.on('messageCreate', (message) => {
 
                 //Resets everyone's score for the day
                 for (const person in people) {
-                    
-                    //GETS USERNAME FROM ID
-                    var personA = person.replace(/</g, '');
-                    var personB = personA.replace(/>/g, '');
-                    var id = personB.replace(/@/g, '');
-                    user = client.users.cache.get(id);
-                    var userName = user.username
+                
+                    var userName = people[person][4]
 
                     //If they haven't done full workout today, kill full workout streak
-                    if (!people[person][2]) {
+                    if (!people[person][2] && people[person][0]) {
                         client.channels.cache.get(channel).send(userName+' lost their full streak of **'+people[person][0]+'**.');
                         people[person][0] = 0;
                     }
 
                     //If they haven't done half workout today, kill half workout streak
-                    if (!people[person][3]) {
+                    if (!people[person][3] && people[person][1]) {
                         client.channels.cache.get(channel).send(userName+' lost their half streak of **'+people[person][1]+'**.');
                         people[person][1] = 0;
                     }
@@ -108,7 +115,7 @@ client.on('interactionCreate', async interaction => {
 
     // actually does the command
     try {
-        await command.execute(interaction);
+        await command.execute(interaction, client);
     } catch (error) {
         console.error(error);
         await interaction.reply({content: "There was an issue running your command", ephemeral: true});

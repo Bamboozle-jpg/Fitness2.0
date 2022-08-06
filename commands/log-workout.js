@@ -13,7 +13,6 @@ module.exports = {
         //Then read people.json
         fs.readFile("./people.json", "utf8", (err, jsonString) => {
             const personName = interaction.user;
-            const printName = interaction.user.username;
             const channel = interaction.channel_id
             if (err) {
                 console.log("File read failed:", err);
@@ -36,13 +35,14 @@ module.exports = {
                         }
                         people[personName][2] = true;
                         people[personName][3] = true;
+                        people[personName][4] = interaction.user.username;
                         console.log(people[personName]);
 
                         //Writes the increase in score to the file and updates them
                         fs.writeFile("./people.json", JSON.stringify(people, null, 4), err => {
                             if (err) console.log("Error writing file:", err);
                         });
-                        replyMessage = printName+' has a full streak of **'+people[personName][0]+'**.\nAnd a half streak of **'+people[personName][1]+'**.'; 
+                        replyMessage = people[personName][4]+' has a full streak of **'+people[personName][0]+'**.\nAnd a half streak of **'+people[personName][1]+'**.'; 
                     
                     //Lets them know if they've already logged for the day
                     } else {
@@ -51,12 +51,11 @@ module.exports = {
                 
                 //If not, add it to the file
                 } else {
-                    replyMessage = printName+' is not in the database yet, adding it now. \nYour full streak is **1**.\nYour half streak is **1**';
-
-
-
+                    replyMessage = interaction.user.username+' is not in the database yet, adding it now. \nYour full streak is **1**.\nYour half streak is **1**';
+                    
                     //start off their score at one, and create it and stringify
-                    personSetup = [1, 1, true, true];
+                    var name = interaction.user.username;
+                    personSetup = [1, 1, true, true, name];
                     people[personName] = personSetup;
                     const jsonString = JSON.stringify(people, null, 4);
 

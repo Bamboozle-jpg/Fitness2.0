@@ -15,4 +15,6 @@ Ideas for fitness v2
     Power ups like freeze streak to give rest days
     
     
-Programming issues we'll need to overcome
+Programming shit
+    Add a t/f var in people for streak freeze active or not
+    Add # var in people for how many streak freezes someone has (and a way to view it? Maybe a profile command to show ur profile)
