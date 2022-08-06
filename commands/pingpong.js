@@ -7,7 +7,7 @@ module.exports = {
         .setDescription("Ping pong :D"),
     
     // runs command
-    async execution(interaction) {
+    async execute(interaction) {
 
 
         
