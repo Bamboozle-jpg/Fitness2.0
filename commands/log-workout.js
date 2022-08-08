@@ -18,6 +18,7 @@ async function message(interaction, client, jsonString) {
         return ['✅', '❌'].includes(reaction.emoji.name) && user.id === interaction.user.id;
     };
     
+    //Gets the message reaction they give
     message.awaitReactions({ filter, max: 1, time: 30000, errors: ['time'] })
         .then(collected => {
             const reaction = collected.first();
@@ -118,6 +119,7 @@ module.exports = {
                     people[person] = personSetup;
                     const jsonString = JSON.stringify(people, null, 4);
 
+                    //Sends the react message to get if they want to be public or not
                     message(interaction, client, jsonString);
                     
                     //Write it to the file
