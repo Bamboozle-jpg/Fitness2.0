@@ -1,11 +1,16 @@
 /*
 Formate for people is 
 discord ID
-0 : Full streak #
-1 : half streak #
-2 : full streak active or not
-3 : half streak active or not
-4 : name
+0 : Full streak # (int)
+1 : half streak # (int)
+2 : full streak active or not (bool)
+3 : half streak active or not (bool)
+4 : name (String)
+5 : Streak freeze active (bool)
+6 : How many streak freezes they have to use (int)
+7 : How many total workouts they've done (int)
+8 : How many total half workouts they've done
+9 : Whether they are set to public or private description
 */
 
 const DiscordJS = require('discord.js');

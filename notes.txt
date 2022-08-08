@@ -14,13 +14,13 @@ Ideas for fitness v2
     
     
 Programming shit
-    Add a t/f var in people for streak freeze active or not
     Add # var in people for how many streak freezes someone has (and a way to view it? Maybe a profile command to show ur profile)
     Add # var in people for total (not streak) workouts and half workouts
     Add a t/f var for if description is public
     Add String var for descriptions of work outs
     Add command for listing persoanl profile (# workouts, Streak freezes available, description, etc etc)
     Add command for Leaderboards (not streaks, but totals)
+    Add command for editing description and whether or not it's public /description-toggle is what it claims it is rn
 
     AAAAALLLL the challenges stuff
     Each challenge can have it's own Json file (can we make it so that we can create a json file with code?)

@@ -31,16 +31,16 @@ module.exports = {
                     //displays one person's full streak
                     if (people[person][0]%resetNum === 0) {
                         if (people[person][2]) {
-                            replyMessage = replyMessage+userName+' Full streak **'+people[person][0]+'** : :green_square: :green_square: :green_square: :green_square: :green_square: ';
+                            replyMessage = replyMessage+userName+'  Full streak **'+people[person][0]+'** : :green_square: :green_square: :green_square: :green_square: :green_square: ';
                         } else {
-                            replyMessage = replyMessage+userName+' Full streak **'+people[person][0]+'** : :white_square_button: :white_square_button: :white_square_button: :white_square_button: :white_square_button: ';
+                            replyMessage = replyMessage+userName+'  Full streak **'+people[person][0]+'** : :white_square_button: :white_square_button: :white_square_button: :white_square_button: :white_square_button: ';
                         }
                     } else {
-                        replyMessage = replyMessage+userName+' Full streak **'+people[person][0]+'** : ';
+                        replyMessage = replyMessage+userName+'  Full streak **'+people[person][0]+'** : ';
                         for (var i = 0; i < people[person][0]%resetNum; i++) {        
                             replyMessage = replyMessage + ':green_square: '
                         }
-                        for (var i = 0; i < (resetNum - people[person][0])%resetNum; i++) {
+                        for (var i = 0; i < resetNum - people[person][0]%resetNum; i++) {
                             replyMessage = replyMessage + ':white_square_button: '
                         }
                     }
@@ -49,16 +49,16 @@ module.exports = {
                     //displays one person's half streak
                     if (people[person][1]%resetNum === 0) {
                         if (people[person][3]) {
-                            replyMessage = replyMessage+userName+' Full streak **'+people[person][1]+'** : :green_square: :green_square: :green_square: :green_square: :green_square: ';
+                            replyMessage = replyMessage+userName+' Half streak **'+people[person][1]+'** : :green_square: :green_square: :green_square: :green_square: :green_square: ';
                         } else {
-                            replyMessage = replyMessage+userName+' Full streak **'+people[person][1]+'** : :white_square_button: :white_square_button: :white_square_button: :white_square_button: :white_square_button: ';
+                            replyMessage = replyMessage+userName+' Half streak **'+people[person][1]+'** : :white_square_button: :white_square_button: :white_square_button: :white_square_button: :white_square_button: ';
                         }
                     } else {
-                        replyMessage = replyMessage+userName+' Full streak **'+people[person][1]+'** : ';
+                        replyMessage = replyMessage+userName+' Half streak **'+people[person][1]+'** : ';
                         for (var i = 0; i < people[person][1]%resetNum; i++) {        
                             replyMessage = replyMessage + ':green_square: '
                         }
-                        for (var i = 0; i < (resetNum - people[person][1])%resetNum; i++) {
+                        for (var i = 0; i < resetNum - people[person][1]%resetNum; i++) {
                             replyMessage = replyMessage + ':white_square_button: '
                         }
                     }
