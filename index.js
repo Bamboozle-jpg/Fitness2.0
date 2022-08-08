@@ -11,6 +11,7 @@ discord ID
 7 : How many total workouts they've done (int)
 8 : How many total half workouts they've done
 9 : Whether they are set to public or private description
+10: Actual description itself
 */
 
 const DiscordJS = require('discord.js');

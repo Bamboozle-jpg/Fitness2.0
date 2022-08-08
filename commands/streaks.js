@@ -18,9 +18,10 @@ module.exports = {
             const personName = interaction.user;
             const channel = interaction.channel_id
             if (err) {
-                console.log("File read failed:", err);
+                console.log("File read failed from streaks:", err);
                 return;
             }
+            
             try {
 
                 //Parse people.json

@@ -37,7 +37,7 @@ async function message(interaction, client, jsonString) {
                     if (err) {
                         console.log('Error writing file', err)
                     } else {
-                        console.log('Successfully wrote file 2')
+                        console.log('Successfully wrote file from message function in full workout')
                     }
                 })
                 
@@ -91,8 +91,10 @@ module.exports = {
                     if (!people[person][2]) {
                         //Increases that persons score
                         people[person][0]++;
+                        people[person][7]++;
                         if (!people[person][3]) {
                             people[person][1]++;
+                            people[person][8]++;
                         }
                         people[person][2] = true;
                         people[person][3] = true;
