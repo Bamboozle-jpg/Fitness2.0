@@ -81,7 +81,7 @@ function reset() {
                     client.channels.cache.get(mainChannel).send(userName + ' used a streak freeze to maintain their streaks!');
                     people[person][2] = false;
                     people[person][3] = false;
-                    
+
                 //Otherwise do it normally
                 } else {
 
@@ -127,7 +127,7 @@ function reset() {
 function dateCheck(done) {
     var d = new Date();
     time = d.getUTCHours()
-    console.log('Still Running, time is : ' + d.toLocaleTimeString() + ' on ' + d.toLocaleDateString() + '. Done status : ' + done);
+    console.log('Still Running, time is : ' + d.toLocaleTimeString() + ' on ' + d.toLocaleDateString() + '. Resetting status : ' + done);
     
     //if it's 2am (time == 8) do the reset and stop it from resetting again
     if (time == 8 && !done) {
