@@ -79,6 +79,9 @@ function reset() {
                 if (people[person][5]) {
                     people[person][5] = false;
                     client.channels.cache.get(mainChannel).send(userName + ' used a streak freeze to maintain their streaks!');
+                    people[person][2] = false;
+                    people[person][3] = false;
+                    
                 //Otherwise do it normally
                 } else {
 
