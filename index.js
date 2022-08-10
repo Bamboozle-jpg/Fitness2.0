@@ -75,20 +75,40 @@ function reset() {
             
                 var userName = people[person][4];
 
-                //If they haven't done full workout today, kill full workout streak
-                if (!people[person][2] && people[person][0]) {
-                    client.channels.cache.get(mainChannel).send(userName+' lost their full streak of **'+people[person][0]+'**.');
-                    people[person][0] = 0;
-                }
+                //checks for streak freeze
+                if (people[person][5]) {
+                    people[person][5] = false;
+                    client.channels.cache.get(mainChannel).send(userName + ' used a streak freeze to maintain their streaks!');
+                //Otherwise do it normally
+                } else {
 
-                //If they haven't done half workout today, kill half workout streak
-                if (!people[person][3] && people[person][1]) {
-                    client.channels.cache.get(mainChannel).send(userName+' lost their half streak of **'+people[person][1]+'**.');
-                    people[person][1] = 0;
-                }
+                    //If they have a full or half streak divisible by 5 give them a streak freeze
+                    var fullDivisor = people[person][0]%5
+                    var halfDivisor = people[person][1]%5
+                    if (people[person][0] && people[person][2] && !fullDivisor) {
+                        client.channels.cache.get(mainChannel).send(userName+' got a full streak of **' + people[person][0] + '** so here\'s a **streak freeze**!');
+                        people[person][6] += 1;
+                    }
+                    if (people[person][0] && people[person][2] && !fullDivisor) {
+                        client.channels.cache.get(mainChannel).send(userName+' got a full streak of **' + people[person][0] + '** so here\'s a **streak freeze**!');
+                        people[person][6] += 1;
+                    }
 
-                people[person][2] = false;
-                people[person][3] = false;
+                    //If they haven't done full workout today, kill full workout streak
+                    if (!people[person][2] && people[person][0]) {
+                        client.channels.cache.get(mainChannel).send(userName+' lost their full streak of **'+people[person][0]+'**.');
+                        people[person][0] = 0;
+                    }
+
+                    //If they haven't done half workout today, kill half workout streak
+                    if (!people[person][3] && people[person][1]) {
+                        client.channels.cache.get(mainChannel).send(userName+' lost their half streak of **'+people[person][1]+'**.');
+                        people[person][1] = 0;
+                    }
+
+                    people[person][2] = false;
+                    people[person][3] = false;
+                }
             }
 
             //Writes the day reset to file (rewrites file with new values)
