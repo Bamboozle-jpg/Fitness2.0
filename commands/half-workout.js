@@ -27,7 +27,7 @@ async function message(interaction, client, jsonString) {
                 //if true, removes, all reactions and changes the message
                 message.reactions.removeAll()
                     .catch(error => console.error('Failed to clear reactions:', error));
-                message.edit('OK, your description will be public.\nRemember you can change this any time with /description-toggle');
+                message.edit('OK, your description will be public.\nRemember you can change this any time with /set-description');
 
                 //then sets the value to true and updates the file
                 people[person][9] = true
