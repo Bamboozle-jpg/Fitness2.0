@@ -15,7 +15,6 @@ Ideas for fitness v2
     
 Programming shit
     Add command for listing persoanl profile (# workouts, Streak freezes available, description, etc etc)
-    Add command for editing description and whether or not it's public /description-toggle is what it claims it is rn
     Make the reset actually happen daily
 
     AAAAALLLL the challenges stuff
