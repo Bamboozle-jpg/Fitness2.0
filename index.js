@@ -129,14 +129,14 @@ function dateCheck(done) {
     time = d.getUTCHours()
     console.log('Still Running, time is : ' + d.toLocaleTimeString() + ' on ' + d.toLocaleDateString() + '. Resetting status : ' + done);
     
-    //if it's 2am (time == 8) do the reset and stop it from resetting again
-    if (time == 8 && !done) {
+    //if it's 2am (time == 9) do the reset and stop it from resetting again
+    if (time == 9 && !done) {
         reset();
         console.log('done is true');
         done = true;
     }
     //if it's 3am, tell it, it can reset again once it gets to 2am
-    if (time == 9 && done) {
+    if (time == 10 && done) {
         console.log('done is false');
         done = false
     }
