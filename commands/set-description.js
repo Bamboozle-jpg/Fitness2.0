@@ -37,25 +37,29 @@ module.exports = {
                 return;
             }
             try {
-
-                //Parse people.json
-                const people = JSON.parse(jsonString);
-
-                const description = interaction.options.getString('description');
-                const publicity = interaction.options.getString('public');
                 
-                people[person][10] = description;
-                if (publicity === 'true') {
-                    people[person][9] = true;
-                    replyMessage = people[person][4] + ', your description is public and is set to \"' + description + '\".';
-                } else {
-                    people[person][9] = false;
-                    replyMessage = people[person][4] + ', your description is private (But has been updated).';
-                }
+                if (people[person]) {
+                    //Parse people.json
+                    const people = JSON.parse(jsonString);
 
-                fs.writeFile("./people.json", JSON.stringify(people, null, 4), err => {
-                    if (err) console.log("Error writing file:", err);
-                });
+                    const description = interaction.options.getString('description');
+                    const publicity = interaction.options.getString('public');
+                    
+                    people[person][10] = description;
+                    if (publicity === 'true') {
+                        people[person][9] = true;
+                        replyMessage = people[person][4] + ', your description is public and is set to \"' + description + '\".';
+                    } else {
+                        people[person][9] = false;
+                        replyMessage = people[person][4] + ', your description is private (But has been updated).';
+                    }
+
+                    fs.writeFile("./people.json", JSON.stringify(people, null, 4), err => {
+                        if (err) console.log("Error writing file:", err);
+                    });
+                } else {
+                    replyMessage = 'Please setup your profile with /log-workout or /half-workout';
+                }
                    
             } catch (err) {
                 console.log("Error parsing JSON string:", err);
