@@ -130,13 +130,13 @@ function dateCheck(done) {
     console.log('Still Running, time is : ' + d.toLocaleTimeString() + ' on ' + d.toLocaleDateString() + '. Resetting status : ' + done);
     
     //if it's 2am (time == 9) do the reset and stop it from resetting again
-    if ((time == 9 || time == 11 || time == 13 || time == 15 || time == 17 || time == 19 || time == 21 || time == 23 || time == 1 || time == 3 || time == 5 || time == 7) && !done) {
+    if (time == 9 && !done) {
         reset();
         console.log('done is true');
         done = true;
     }
     //if it's 3am, tell it, it can reset again once it gets to 2am
-    if ((time == 10 || time == 12 || time == 14 || time == 16 || time == 18 || time == 20 || time == 22 || time == 24 || time == 2 || time == 4 || time == 6 || time == 8)  && done) {
+    if (time == 10 && done) {
         console.log('done is false');
         done = false
     }

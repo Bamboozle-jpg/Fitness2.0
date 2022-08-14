@@ -37,6 +37,7 @@ module.exports = {
                 return;
             }
             try {
+                const people = JSON.parse(jsonString);
                 
                 if (people[person]) {
                     //Parse people.json
