@@ -91,7 +91,7 @@ module.exports = {
                         //Increases that persons score
                         people[person][1]++;
                         people[person][8]++;
-                        people[person][2] = true;
+                        people[person][3] = true;
                         people[person][4] = name;
                         console.log(people[person]);
 
@@ -111,7 +111,7 @@ module.exports = {
                     replyMessage = 'Looks like you\'re new, '+name+'.\nYou\'ve been added to the database. \nYour full streak is **0**.\nYour half streak is **1**';
                     
                     //start off their score at one, and create it and stringify
-                    personSetup = [0, 1, false, true, name, false, 0, 1, 1, false, "This is where you'd put your description"];
+                    personSetup = [0, 1, false, true, name, false, 0, 1, 0, false, "This is where you'd put your description"];
                     people[person] = personSetup;
                     const jsonString = JSON.stringify(people, null, 4);
 
