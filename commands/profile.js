@@ -31,6 +31,7 @@ module.exports = {
                 var resetNum = 5;
 
                 var person = interaction.user;
+                console.log(person);
                 avatar = interaction.user.avatarURL();
                 var name = interaction.user.username;
 
@@ -87,7 +88,7 @@ module.exports = {
                             replyStreaks = replyStreaks+' Half streak **'+people[person][1]+'** : :white_square_button: :white_square_button: :white_square_button: :white_square_button: :white_square_button: ';
                         }
                     } else {
-                        replyStreaks = replyStreaks+' Half streak **'+people[person][1]+'** : ';
+                        replyStreaks = replyStreaks+'Half streak **'+people[person][1]+'** : ';
                         for (var i = 0; i < people[person][1]%resetNum; i++) {        
                             replyStreaks = replyStreaks + ':green_square: '
                         }
