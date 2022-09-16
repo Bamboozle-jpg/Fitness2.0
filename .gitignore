@@ -4,7 +4,11 @@
 #Random shit
 node_modules
 
+#Locks the package
+package-lock.json
+
+#Package
+package.json
+
 #People
 people.json
-package.json
-package-lock.json
